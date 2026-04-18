@@ -1,0 +1,18 @@
+# Hugo 自动生成的静态网页文件夹（GitHub Actions 会在云端生成，本地不需要上传）
+public/
+resources/
+
+# 编译锁文件和临时文件
+.hugo_build.lock
+hugo_stats.json
+
+# 操作系统产生的垃圾文件
+.DS_Store
+Thumbs.db
+
+# 如果你以后用了 IDE (虽然你刚卸载了，但以防万一)
+.idea/
+.vscode/
+
+# 各种运行日志
+*.log
