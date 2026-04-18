@@ -1,4 +1,12 @@
-baseURL = 'https://example.org/'
-locale = 'en-us'
-title = 'My New Hugo Project'
+baseURL = 'https://tsomoore.github.io/'
+locale = 'zh-cn'
+title = "Root Directory"
 theme = "PaperMod"
+[params]
+description = "talk less, write more, think sharper, code freer!"
+[params.homeImfoParams]
+Title = "Welcome to tsomoore's blog"
+Content = "CS @ BUPT | 随波逐流的胡乱读书 | archlinux && macbook | operating systems && compilers外行爱好者 | 精神分析学"
+ShowCodeCopyButtons = true
+displayFullContent = false
+paginate = 5
