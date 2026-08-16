@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatDate, taxonomySlug } from "@/lib/notes";
+import type { NoteEntry } from "@/lib/notes";
+import "katex/dist/katex.min.css";
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  note: NoteEntry;
+  headings: Heading[];
+}
+
+const { note, headings } = Astro.props;
+const toc = headings.filter((heading) => heading.depth > 1 && heading.depth < 4);
+---
+
+<BaseLayout title={note.data.title} description={note.data.description}>
+  <article class="note-page">
+    <header class="note-hero">
+      <p class="eyebrow">{note.data.type}</p>
+      <h1>{note.data.title}</h1>
+      {note.data.description && <p class="lead">{note.data.description}</p>}
+      <div class="note-meta">
+        <time datetime={note.data.date.toISOString()}>发布于 {formatDate(note.data.date)}</time>
+        {note.data.updated && (
+          <time datetime={note.data.updated.toISOString()}>更新于 {formatDate(note.data.updated)}</time>
+        )}
+      </div>
+      <div class="term-line">
+        {note.data.categories.map((category) => (
+          <a href={`/categories/${taxonomySlug(category)}/`}>{category}</a>
+        ))}
+        {note.data.tags.map((tag) => (
+          <a href={`/tags/${taxonomySlug(tag)}/`}>#{tag}</a>
+        ))}
+      </div>
+    </header>
+
+    <div class="note-frame">
+      {toc.length > 0 && (
+        <aside class="toc" aria-label="目录">
+          <strong>目录</strong>
+          {toc.map((heading) => (
+            <a class={`toc-depth-${heading.depth}`} href={`#${heading.slug}`}>{heading.text}</a>
+          ))}
+        </aside>
+      )}
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

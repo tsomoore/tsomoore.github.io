@@ -1,0 +1,24 @@
+---
+interface Taxon {
+  label: string;
+  href: string;
+  count: number;
+}
+
+interface Props {
+  items: Taxon[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="taxonomy-cloud">
+  {
+    items.map((item) => (
+      <a href={item.href}>
+        <span>{item.label}</span>
+        <small>{item.count}</small>
+      </a>
+    ))
+  }
+</div>

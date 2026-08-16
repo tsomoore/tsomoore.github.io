@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TaxonomyCloud from "@/components/TaxonomyCloud.astro";
+import { collectTags, getPublishedNotes, taxonomySlug } from "@/lib/notes";
+
+const notes = await getPublishedNotes();
+const tags = collectTags(notes).map((tag) => ({
+  label: tag,
+  href: `/tags/${taxonomySlug(tag)}/`,
+  count: notes.filter((note) => note.data.tags.includes(tag)).length
+}));
+---
+
+<BaseLayout title="标签" description="按标签浏览笔记。">
+  <section class="note-hero">
+    <p class="eyebrow">Tags</p>
+    <h1>标签</h1>
+    <p class="lead">标签适合记录更细的线索：算法、证明、操作系统、写作、引用管理。</p>
+  </section>
+  <section>
+    <div class="section-head">
+      <h2>全部标签</h2>
+    </div>
+    <TaxonomyCloud items={tags} />
+  </section>
+</BaseLayout>

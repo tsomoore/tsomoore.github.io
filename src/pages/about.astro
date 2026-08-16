@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="关于" description="关于 Tsomoore Notes。">
+  <section class="note-hero">
+    <p class="eyebrow">About</p>
+    <h1>关于这个博客</h1>
+    <p class="lead">这里是一个杂而有序的个人知识库。</p>
+  </section>
+  <div class="prose">
+    <p>
+      我会在这里整理读书笔记、计算机专业学习笔记、论文阅读记录、随笔和临时收藏。这个站点刻意保持简洁：重点放在可长期维护的文字、公式、图片和索引关系上。
+    </p>
+    <p>
+      你可以在 <code>src/content/notes</code> 中继续添加 <code>.md</code> 或 <code>.mdx</code> 文件；分类和标签写在每篇文章顶部的 frontmatter 里。
+    </p>
+  </div>
+</BaseLayout>

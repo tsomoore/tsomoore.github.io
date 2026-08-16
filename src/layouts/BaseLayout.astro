@@ -1,0 +1,43 @@
+---
+import SiteHeader from "@/components/SiteHeader.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteTitle = "Tsomoore Notes";
+const siteDescription = "读书、计算机、论文和随笔的个人知识库。";
+const { title = siteTitle, description = siteDescription } = Astro.props;
+const pageTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Tsomoore Notes RSS" href="/rss.xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteHeader />
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <span>© {new Date().getFullYear()} Tsomoore</span>
+        <a href="/rss.xml">RSS</a>
+      </footer>
+    </div>
+  </body>
+</html>

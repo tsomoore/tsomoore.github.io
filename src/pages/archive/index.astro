@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NoteList from "@/components/NoteList.astro";
+import { getPublishedNotes, notesByType } from "@/lib/notes";
+
+const notes = await getPublishedNotes();
+const groups = notesByType(notes);
+---
+
+<BaseLayout title="归档" description="按笔记类型整理的文章归档。">
+  <section class="note-hero">
+    <p class="eyebrow">Archive</p>
+    <h1>归档</h1>
+    <p class="lead">按读书笔记、计算机、论文、随笔和收藏分组浏览。</p>
+  </section>
+
+  {
+    groups.map((group) => (
+      <section aria-labelledby={`type-${group.type}`}>
+        <div class="section-head">
+          <h2 id={`type-${group.type}`}>{group.type}</h2>
+        </div>
+        <NoteList notes={group.notes} />
+      </section>
+    ))
+  }
+</BaseLayout>

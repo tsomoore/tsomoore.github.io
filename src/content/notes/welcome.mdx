@@ -1,0 +1,53 @@
+---
+title: "欢迎来到 Tsomoore Notes"
+description: "一篇用于测试分类、标签、公式和代码块的示例笔记。"
+date: 2026-08-16
+type: "随笔"
+categories: ["站点说明"]
+tags: ["写作系统", "Astro", "MDX"]
+math: true
+---
+
+这是博客的第一篇示例笔记。之后你可以把它删掉，或者把它改写成真正的开篇说明。
+
+## 笔记组织方式
+
+每篇笔记都放在 `src/content/notes` 目录下，文件开头用 frontmatter 描述元信息：
+
+```yaml
+title: "文章标题"
+description: "一句话摘要"
+date: 2026-08-16
+type: "论文"
+categories: ["机器学习", "表示学习"]
+tags: ["contrastive-learning", "reading-note"]
+math: true
+```
+
+`type` 适合放大类：读书笔记、计算机、论文、随笔、收藏。`categories` 放稳定主题，`tags` 放细粒度线索。
+
+## 数学公式
+
+行内公式可以这样写：$E = mc^2$。
+
+块级公式可以这样写：
+
+$$
+\mathcal{L}(\theta)=\frac{1}{n}\sum_{i=1}^{n}\ell(f_\theta(x_i), y_i)+\lambda\|\theta\|_2^2
+$$
+
+## 代码笔记
+
+```ts
+type NoteKind = "读书笔记" | "计算机" | "论文" | "随笔" | "收藏";
+
+const isResearchNote = (kind: NoteKind) => kind === "论文";
+```
+
+## 图片
+
+把图片放到 `public/images` 后，可以这样引用：
+
+```md
+![图片说明](/images/example.png)
+```

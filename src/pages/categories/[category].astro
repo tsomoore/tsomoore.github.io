@@ -1,0 +1,32 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NoteList from "@/components/NoteList.astro";
+import { collectCategories, getPublishedNotes, taxonomySlug } from "@/lib/notes";
+
+export async function getStaticPaths() {
+  const notes = await getPublishedNotes();
+  return collectCategories(notes).map((category) => ({
+    params: { category: taxonomySlug(category) },
+    props: {
+      category,
+      notes: notes.filter((note) => note.data.categories.includes(category))
+    }
+  }));
+}
+
+const { category, notes } = Astro.props;
+---
+
+<BaseLayout title={`分类：${category}`} description={`分类 ${category} 下的笔记。`}>
+  <section class="note-hero">
+    <p class="eyebrow">Category</p>
+    <h1>{category}</h1>
+    <p class="lead">{notes.length} 篇笔记</p>
+  </section>
+  <section>
+    <div class="section-head">
+      <h2>文章</h2>
+    </div>
+    <NoteList notes={notes} />
+  </section>
+</BaseLayout>

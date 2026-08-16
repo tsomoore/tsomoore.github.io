@@ -1,0 +1,35 @@
+---
+import { formatDate } from "@/lib/notes";
+import type { NoteEntry } from "@/lib/notes";
+
+interface Props {
+  notes: NoteEntry[];
+}
+
+const { notes } = Astro.props;
+---
+
+<div class="note-list">
+  {
+    notes.map((note) => (
+      <article class="note-row">
+        <div class="note-row-meta">
+          <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+          <span>{note.data.type}</span>
+        </div>
+        <div>
+          <h2><a href={`/notes/${note.id}/`}>{note.data.title}</a></h2>
+          {note.data.description && <p>{note.data.description}</p>}
+          <div class="term-line">
+            {note.data.categories.map((category) => (
+              <span>{category}</span>
+            ))}
+            {note.data.tags.slice(0, 4).map((tag) => (
+              <span>#{tag}</span>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>
